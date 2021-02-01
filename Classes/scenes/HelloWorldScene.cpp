@@ -51,6 +51,10 @@ bool HelloWorld::init()
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
+    DrawNode* bg = DrawNode::create();
+    bg->drawRect(origin, visibleSize, Color4F(0.5, 0.5, 0.5, 1));
+    this->addChild(bg);
+
     /////////////////////////////
     // 2. add a menu item with "X" image, which is clicked to quit the program
     //    you may modify it.
