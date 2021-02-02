@@ -111,10 +111,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
     register_all_packages();
 
     // create a scene. it's an autorelease object
-    auto scene =GameInit::createScene();
+    auto scene =EnterGame::createScene();
 
     // run
-    director->runWithScene(scene);
+    director->runWithScene(TransitionFade::create(1.5, scene, Color3B(0, 0, 0)));
 
     return true;
 }
