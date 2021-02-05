@@ -8,44 +8,24 @@ cocos2d::Scene* EnterGame::createScene() {
 
 bool EnterGame::init() {
 
-	_initBg();
-	_initSeq();
-	_initText();
+	//Listen Esc for exit
+	cocos2d::EventListenerKeyboard* kbL = cocos2d::EventListenerKeyboard::create();
+	kbL->onKeyReleased = [&](cocos2d::EventKeyboard::KeyCode code, cocos2d::Event* event) {
+		switch (code)
+		{
+		case cocos2d::EventKeyboard::KeyCode::KEY_ESCAPE:
+			cocos2d::Director::getInstance()->popToSceneStackLevel(0);
+			break;
+		default:
+			break;
+		}
+	};
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(kbL, this);
+
+	this->addChild(GameManager::getinstance()->backGround);
 	_initStartButton();
 
 	return true;
-}
-
-void EnterGame::_initBg() {
-
-	_bg = cocos2d::DrawNode::create();
-
-	cocos2d::Vec2 origin = cocos2d::Director::getInstance()->getVisibleOrigin();
-	cocos2d::Vec2 winSize = cocos2d::Director::getInstance()->getWinSize();
-
-	_bg->drawSolidRect(origin, winSize, cocos2d::Color4F(0.24, 0.24, 0.24, 1));
-	this->addChild(_bg);
-
-}
-
-void EnterGame::_initSeq() {
-
-	_seq = cocos2d::Sequence::create(nullptr);
-
-}
-// Bug can't display text
-void EnterGame::_initText() {
-
-	cocos2d::Vec2 origin = cocos2d::Director::getInstance()->getVisibleOrigin();
-	cocos2d::Vec2 winSize = cocos2d::Director::getInstance()->getWinSize();
-
-	_text = cocos2d::ui::Text::create("Drmix", "Arial", 20);
-	_text->setColor(cocos2d::Color3B(1, 1, 1));
-	_text->setPosition(cocos2d::Vec2(origin.x + winSize.x / 2, origin.y + winSize.y / 2));
-	_text->setTextColor(cocos2d::Color4B(1, 1, 1,1));
-
-	this->addChild(_text);
-	
 }
 
 void EnterGame::_initStartButton() {
@@ -54,22 +34,29 @@ void EnterGame::_initStartButton() {
 
 	_bt = cocos2d::ui::Button::create();
 	_bt->setTitleText("Start Game");
-	_bt->setZoomScale(0.2);
+	_bt->setZoomScale(0.01);
 	_bt->setPosition(cocos2d::Vec2(winSize.x / 2, winSize.y / 2));
+	_bt->setTitleFontSize(20);
 	_bt->addTouchEventListener(
 		[&](cocos2d::Ref*, cocos2d::ui::Widget::TouchEventType type) {
 			switch (type)
 			{
 			case cocos2d::ui::Widget::TouchEventType::BEGAN:
+
 				break;
 			case cocos2d::ui::Widget::TouchEventType::MOVED:
+
 				break;
 			case cocos2d::ui::Widget::TouchEventType::ENDED:
-				_buttonRef();
+
+				_buttonRefEnded();
+
 				break;
 			case cocos2d::ui::Widget::TouchEventType::CANCELED:
+
 				break;
 			default:
+
 				break;
 			}
 		}
@@ -80,9 +67,10 @@ void EnterGame::_initStartButton() {
 
 }
 
-void EnterGame::_buttonRef() {
+void EnterGame::_buttonRefEnded() {
 
-	_bt->setTitleText("Clicked");
+	//GameManager::getinstance()->enterMenu();
+	GameManager::getinstance()->enterGame();
 
 }
 

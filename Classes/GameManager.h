@@ -8,7 +8,10 @@ public:
 	GameManager();
 	~GameManager();
 
-	GameManager* getinstance();
+	static GameManager* getinstance();
+
+	cocos2d::Vec2 winOrigin;
+	cocos2d::Vec2 winSize;
 
 	//Change Scene
 	void enterEnterGame();
@@ -17,4 +20,7 @@ public:
 	void enterMenu();
 	void enterSettings();
 	void enterStop();
+
+	//Background
+	cocos2d::DrawNode* backGround;
 };
