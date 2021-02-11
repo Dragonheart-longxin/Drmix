@@ -8,9 +8,11 @@ cocos2d::Scene* EnterGame::createScene() {
 
 bool EnterGame::init() {
 
+	_initBg();
 	//Listen Esc for exit
 	cocos2d::EventListenerKeyboard* kbL = cocos2d::EventListenerKeyboard::create();
-	kbL->onKeyReleased = [&](cocos2d::EventKeyboard::KeyCode code, cocos2d::Event* event) {
+	kbL->onKeyReleased = [&](cocos2d::EventKeyboard::KeyCode code, cocos2d::Event* event) 
+	{
 		switch (code)
 		{
 		case cocos2d::EventKeyboard::KeyCode::KEY_ESCAPE:
@@ -22,7 +24,7 @@ bool EnterGame::init() {
 	};
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(kbL, this);
 
-	this->addChild(GameManager::getinstance()->backGround);
+	this->addChild(_bg);
 	_initStartButton();
 
 	return true;
@@ -67,10 +69,20 @@ void EnterGame::_initStartButton() {
 
 }
 
+void EnterGame::_initBg() {
+
+	_bg = cocos2d::DrawNode::create();
+	_bg->drawSolidRect(cocos2d::Director::getInstance()->getVisibleOrigin(),
+					   cocos2d::Director::getInstance()->getVisibleSize(),
+					   cocos2d::Color4F(0.24, 0.24, 0.24, 1)
+					  );
+
+}
+
 void EnterGame::_buttonRefEnded() {
 
-	//GameManager::getinstance()->enterMenu();
-	GameManager::getinstance()->enterGame();
+	cocos2d::Scene* sc = Game::createScene();
+	cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(1.f, sc));
 
 }
 

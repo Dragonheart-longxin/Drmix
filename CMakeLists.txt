@@ -57,24 +57,26 @@ endif()
 # add cross-platforms source files and header files 
 list(APPEND GAME_SOURCE
      Classes/AppDelegate.cpp
-     Classes/GameManager.cpp
-     Classes/scenes/EnterGame.cpp
-     Classes/scenes/Game.cpp
-     Classes/scenes/Loading.cpp
-     Classes/scenes/Menu.cpp
-     Classes/scenes/Settings.cpp
-     Classes/scenes/Stop.cpp
+     Classes/base/GameManager.cpp
+     Classes/scenes/EnterGame/EnterGame.cpp
+     Classes/scenes/Game/Game.cpp
+     Classes/scenes/Levels/Levels.cpp
+     Classes/scenes/Loading/Loading.cpp
+     Classes/scenes/Menu/Menu.cpp
+     Classes/scenes/Settings/Settings.cpp
+     Classes/scenes/Stop/Stop.cpp
      )
 list(APPEND GAME_HEADER
      Classes/Drmix.h
      Classes/AppDelegate.h
-     Classes/GameManager.h
-     Classes/scenes/EnterGame.h
-     Classes/scenes/Game.h
-     Classes/scenes/Loading.h
-     Classes/scenes/Menu.h
-     Classes/scenes/Settings.h
-     Classes/scenes/Stop.h
+     Classes/base/GameManager.h
+     Classes/scenes/EnterGame/EnterGame.h
+     Classes/scenes/Game/Game.h
+     Classes/scenes/Levels/Levels.h
+     Classes/scenes/Loading/Loading.h
+     Classes/scenes/Menu/Menu.h
+     Classes/scenes/Settings/Settings.h
+     Classes/scenes/Stop/Stop.h
      )
 
 if(ANDROID)
